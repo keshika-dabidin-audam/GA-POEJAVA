@@ -1,0 +1,40 @@
+name: trigger-event
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [closed]
+jobs:
+  issue_created:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Issue Created
+        run: echo "Issue créée"
+  pr_merged:
+    if: ${{github.event.pull_request.merged == true}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR Merged
+        run: echo "PR mergée"
+  next_one:
+    needs: pr_merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: Next One
+        run: echo "Exercice précédent terminé"
+  workflow_depends:
+    runs-on: ubuntu-latest
+# Deuxième job
+  manual_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Workflow
+        run: echo "Lancer manuellement"
+        # Ajoutez ici votre logique pour déclencher le deuxième job
+  dependent_job:
+    needs: manual_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependent Job
+        run: echo "Job dépendant exécuté"
