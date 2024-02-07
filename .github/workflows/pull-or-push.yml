@@ -11,8 +11,8 @@ jobs:
           run: echo "C'est un push !"
         
         - name: Create Pull Request
-          if: github.event_name == 'push'
-          uses: remote/create-pull-request@v3
+          if: ${{ github.event_name == 'push' }}
+          uses: keshika-dabidin-audam/create-pull-request@v3
           with:
             title: Update something
             body: This is an automatically created pull request triggered by a push event.
