@@ -1,0 +1,24 @@
+name: Pull or Push request
+
+on: [push, pull_request]
+
+env:
+  PUSH: C'est un push ! 
+  PULL_REQUEST: C'est une pull request !
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Push
+        run: echo "$PUSH"
+
+  pull_request:
+    runs-on: ubuntu-latest
+    if: ${{github.event_name == 'pull_request'}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Pull request
+        run: echo "$PULL_REQUEST" #essai
+
