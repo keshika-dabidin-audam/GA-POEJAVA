@@ -9,6 +9,17 @@ jobs:
         - name: "Dit Push"
           if: ${{ github.event_name == 'push' }}
           run: echo "C'est un push !"
+        
+        - name: Create Pull Request
+          if: github.event_name == 'push'
+          uses: create-pull-request@v3
+          with:
+            title: Update something
+            body: This is an automatically created pull request triggered by a push event.
+            branch: main  # Change to your main branch
+            base: remote # Change to your remote branch
+            token: ${{ secrets.GITHUB_TOKEN }}
+
         - name: "Dit Pull request"
           if: ${{ github.event_name == 'pull_request' }}
           run: echo "C'est une pull request !"
