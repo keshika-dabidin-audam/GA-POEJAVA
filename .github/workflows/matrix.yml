@@ -1,0 +1,17 @@
+name: Matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate_sentences:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fruit: ["pomme", "banane", "orange", "fraise"]
+        name: ["Jean", "Marie", "Pierre"]
+      fail-fast: true
+    steps:
+      - name: Generate Sentence
+        run: echo "${{ matrix.name }} mange une ${{ matrix.fruit }}, et il adore ça !"
+
